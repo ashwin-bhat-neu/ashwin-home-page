@@ -1,0 +1,24 @@
+{
+  "name": "personal-home-page",
+  "version": "1.0.0",
+  "description": "Front-end only personal home page built with HTML, CSS and ES6 modules.",
+  "type": "module",
+  "main": "js/main.js",
+  "scripts": {
+    "start": "serve .",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "author": "bash-win <bhat.as@northeastern.edu>",
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.11.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.6",
+    "globals": "^17.12.0",
+    "prettier": "^3.9.9",
+    "serve": "^14.2.6"
+  }
+}
