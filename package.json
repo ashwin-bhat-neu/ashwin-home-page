@@ -1,7 +1,7 @@
 {
   "name": "personal-home-page",
   "version": "1.0.0",
-  "description": "Front-end only personal home page built with HTML, CSS and ES6 modules.",
+  "description": "Personal home page of Ashwin Satish Bhat, built with plain HTML, CSS and ES6 modules.",
   "type": "module",
   "main": "js/main.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
-  "author": "bash-win <bhat.as@northeastern.edu>",
+  "author": "Ashwin Satish Bhat <bhat.as@northeastern.edu>",
   "license": "MIT",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
