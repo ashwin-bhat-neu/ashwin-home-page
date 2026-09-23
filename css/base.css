@@ -1,0 +1,48 @@
+:root {
+  --color-ground: #161719;
+  --color-surface: #1d1e21;
+  --color-line: #34363a;
+  --color-ink: #d8d5ce;
+  --color-ink-soft: #9e9c96;
+  --color-sage: #8e998b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-ground);
+  color: var(--color-ink);
+  font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  margin-top: 0;
+  line-height: 1.2;
+}
+
+p {
+  margin-top: 0;
+}
+
+a {
+  color: var(--color-ink);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--color-sage);
+}
+
+img {
+  max-width: 100%;
+}
