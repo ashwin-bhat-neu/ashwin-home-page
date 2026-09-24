@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Ashwin Satish Bhat" />
+    <meta
+      name="description"
+      content="Projects and artwork by Ashwin Satish Bhat: terminal tools, a Neovim plugin, ink sketches and pixel art."
+    />
+    <title>Work - Ashwin Satish Bhat</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="site-brand" href="index.html">ASB</a>
+        <nav class="site-nav" aria-label="Main">
+          <ul class="site-nav__list">
+            <li><a class="site-nav__link" href="index.html">Home</a></li>
+            <li>
+              <a class="site-nav__link" href="work.html" aria-current="page"
+                >Work</a
+              >
+            </li>
+            <li><a class="site-nav__link" href="ai.html">Lab</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="work-intro">
+        <h1 class="work-intro__title">Work</h1>
+        <p class="work-intro__text">
+          Here's the stuff I've been building, plus some of my sketches and
+          pixel art.
+        </p>
+      </section>
+
+      <section class="section" id="projects">
+        <h2 class="section__title">Projects</h2>
+        <article class="project">
+          <h3 class="project__title">Arborist</h3>
+          <p class="project__type">CLI tool</p>
+          <p class="project__text">
+            A simple command-line tool that generates directory tree
+            visualizations. Point it at a folder and it prints the structure as
+            a tree.
+          </p>
+          <a class="project__link" href="https://github.com/bash-win/arborist"
+            >github.com/bash-win/arborist</a
+          >
+        </article>
+        <article class="project">
+          <h3 class="project__title">learn.nvim</h3>
+          <p class="project__type">Neovim plugin</p>
+          <p class="project__text">
+            Learn Vim motions through scored mini-games, right inside Neovim.
+            Each lesson drops you into a practice buffer with a goal, like
+            reaching a spot or editing the text into a target shape, and counts
+            your keystrokes against a recommended budget (par). Finish under par
+            for three stars. Lessons are grouped into tracks that build up from
+            hjkl to operator + motion combos.
+          </p>
+          <a class="project__link" href="https://github.com/bash-win/learn.nvim"
+            >github.com/bash-win/learn.nvim</a
+          >
+        </article>
+        <article class="project">
+          <h3 class="project__title">PetriTerm</h3>
+          <p class="project__type">Simulation &middot; work in progress</p>
+          <p class="project__text">
+            A real-time, grid-based ecology simulator that runs entirely in the
+            terminal. This one is an experiment: I built it entirely with AI.
+          </p>
+          <a class="project__link" href="https://github.com/bash-win/PetriTerm"
+            >github.com/bash-win/PetriTerm</a
+          >
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <p>&copy; 2026 Ashwin Satish Bhat</p>
+        <p>Made with HTML, CSS and JavaScript.</p>
+      </div>
+    </footer>
+  </body>
+</html>
