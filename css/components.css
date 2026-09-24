@@ -1,0 +1,86 @@
+.button {
+  display: inline-block;
+  padding: 10px 34px;
+  border: none;
+  background-color: var(--color-ink);
+  clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%);
+  color: var(--color-ground);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: var(--color-sage);
+  color: var(--color-ground);
+}
+
+.button--quiet {
+  background-color: #2a2c2f;
+  color: var(--color-ink);
+}
+
+.button--quiet:hover {
+  background-color: #3a3c40;
+  color: var(--color-ink);
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0;
+  list-style: none;
+}
+
+.tag {
+  padding: 2px 14px;
+  background-color: #25272a;
+  clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  color: var(--color-ink-soft);
+  font-family: monospace;
+  font-size: 0.8rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  border-left: 3px solid #4a4c50;
+  background-color: var(--color-surface);
+  clip-path: polygon(0 0, 90% 0, 100% 15%, 100% 100%, 0 100%);
+}
+
+.card:hover {
+  border-left-color: var(--color-sage);
+}
+
+.card__meta {
+  margin-bottom: 4px;
+  color: #6b6a66;
+  font-family: monospace;
+  font-size: 0.8rem;
+}
+
+.card__title {
+  margin-bottom: 10px;
+}
+
+.card__text {
+  flex-grow: 1;
+  color: var(--color-ink-soft);
+}
+
+.card__link {
+  color: var(--color-sage);
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 1.5rem;
+}
