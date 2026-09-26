@@ -1,0 +1,358 @@
+/*
+  ===========================================================================
+  Lab page styles.
+
+  This sheet is the only page-specific layer the Lab page loads; the header,
+  footer, buttons, cards and tags all come from the shared sheets. What is
+  added here is density: monospace labels, instrument panels, corner rules and
+  motion. The palette is unchanged, so the page reads as the same site.
+
+  Everything animated is wrapped in a prefers-reduced-motion guard at the
+  bottom of the file rather than being switched off in script, so a reader who
+  asks their system for less motion gets a still page with no code path of its
+  own.
+  ===========================================================================
+*/
+
+/* ---------------------------------------------------------------- Hero --- */
+
+/*
+  The hero is the positioning context for the canvas. `isolation` opens a new
+  stacking context so the canvas can sit under the copy without a negative
+  z-index, which would otherwise let it slide behind the page background.
+*/
+.lab-hero {
+  position: relative;
+  isolation: isolate;
+  padding: 96px 0 80px;
+  overflow: hidden;
+}
+
+/*
+  The canvas is stretched over the hero and drawn at device pixel ratio by the
+  lattice module. The mask fades the field out towards the bottom edge so the
+  animation never competes with the first section rule beneath it.
+*/
+.lab-hero__lattice {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  mask-image: linear-gradient(to bottom, #000 45%, transparent 100%);
+  opacity: 0.85;
+}
+
+.lab-hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+}
+
+/* Monospace, wide-tracked labels are the one typographic tell of this page. */
+.lab-hero__eyebrow,
+.lab-label {
+  margin-bottom: 10px;
+  color: var(--color-sage);
+  font-family: monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.lab-hero__title {
+  margin-bottom: 20px;
+  font-size: 4.5rem;
+  letter-spacing: -0.03em;
+}
+
+.lab-hero__lead {
+  margin-bottom: 28px;
+  color: var(--color-ink-soft);
+  font-size: 1.2rem;
+}
+
+/*
+  The scrambled phrase changes width as it cycles. Reserving an inline-block
+  with a minimum width keeps the surrounding sentence from reflowing on every
+  frame, which would otherwise make the whole paragraph twitch.
+*/
+.lab-scramble {
+  display: inline-block;
+  min-width: 15ch;
+  color: var(--color-ink);
+  font-family: monospace;
+}
+
+.lab-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.lab-hero__command {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ----------------------------------------------------------- Telemetry --- */
+
+.lab-telemetry__note {
+  max-width: 560px;
+  margin-bottom: 28px;
+  color: var(--color-ink-soft);
+}
+
+/*
+  A fixed three columns rather than auto-fit: there are six instruments, and
+  three divides them into two full rows. Auto-fit would pick five columns on a
+  wide screen and leave a one-cell row with a slab of the container's
+  background showing through beside it.
+*/
+.lab-readout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin: 0;
+  background-color: var(--color-line);
+}
+
+/*
+  The cells are separated by the 1px grid gap showing the container colour
+  through, which gives a hairline rule between instruments without each cell
+  needing its own border and doubling up along shared edges.
+*/
+.lab-readout__cell {
+  position: relative;
+  padding: 18px 20px;
+  background-color: var(--color-surface);
+}
+
+/* A short sage tick in the corner, the flat cousin of the trapezoid cut. */
+.lab-readout__cell::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 22px;
+  height: 3px;
+  background-color: var(--color-sage);
+}
+
+.lab-readout__name {
+  color: #6b6a66;
+  font-family: monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/*
+  Tabular figures stop the numbers from jittering sideways as digits change,
+  which matters when a value updates four times a second.
+*/
+.lab-readout__value {
+  margin: 6px 0 0;
+  color: var(--color-ink);
+  font-family: monospace;
+  font-size: 1.35rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ----------------------------------------------------------- Subsystems --- */
+
+/*
+  Four cards, so two columns pair them into two full rows. The shared .grid
+  rule packs as many 16rem columns as fit, which would leave the fourth card
+  stranded alone on a third row.
+*/
+.lab-systems .grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/*
+  The tilt module writes --tilt-x and --tilt-y on each card as the pointer
+  moves. The fallbacks mean the transform is valid and flat before any script
+  runs, and stays flat for pointers the module ignores.
+*/
+.lab-card {
+  transform: perspective(900px) rotateX(var(--tilt-x, 0deg))
+    rotateY(var(--tilt-y, 0deg));
+  transform-style: preserve-3d;
+  transition: transform 0.25s ease-out;
+}
+
+.lab-card .card__title {
+  color: var(--color-ink);
+}
+
+/* --------------------------------------------------------- Provenance --- */
+
+.lab-provenance__text {
+  max-width: 680px;
+  color: var(--color-ink-soft);
+}
+
+/* ---------------------------------------------------- Command palette --- */
+
+/*
+  Sized in ch so the dialog tracks the monospace command list rather than an
+  arbitrary pixel width, and pinned towards the top of the viewport the way a
+  palette is expected to appear.
+*/
+.palette {
+  width: 52ch;
+  max-width: 92%;
+  margin-top: 12vh;
+  padding: 0;
+  border: none;
+  border-top: 3px solid var(--color-sage);
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+}
+
+.palette::backdrop {
+  background-color: rgb(10 11 12 / 72%);
+}
+
+.palette__search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.palette__prompt {
+  color: var(--color-sage);
+  font-family: monospace;
+}
+
+/*
+  The input carries no border of its own: the row it sits in is the control,
+  which keeps the palette reading as one instrument rather than a form field
+  dropped into a box.
+*/
+.palette__input {
+  flex-grow: 1;
+  border: none;
+  background: none;
+  color: var(--color-ink);
+  font-family: monospace;
+  font-size: 1rem;
+}
+
+.palette__input:focus {
+  outline: none;
+}
+
+.palette__list {
+  max-height: 46vh;
+  margin: 0;
+  padding: 6px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+/*
+  Each row is a real button filling its list item, so the whole strip is
+  clickable and keyboard reachable without any of the role or tabindex
+  patching a <div> would need.
+*/
+.palette__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 9px 12px;
+  border: none;
+  background: none;
+  color: var(--color-ink-soft);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+/*
+  One class covers both the hovered row and the row the arrow keys have
+  landed on, so mouse and keyboard selection can never disagree visually.
+*/
+.palette__option:hover,
+.palette__option.is-active {
+  background-color: #2a2c2f;
+  color: var(--color-ink);
+}
+
+.palette__option-hint {
+  color: #6b6a66;
+  font-family: monospace;
+  font-size: 0.75rem;
+}
+
+.palette__empty {
+  margin: 0;
+  padding: 18px;
+  color: #6b6a66;
+  font-family: monospace;
+  font-size: 0.85rem;
+}
+
+.palette__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 18px;
+  border-top: 1px solid var(--color-line);
+}
+
+.palette__hint {
+  margin: 0;
+  color: #6b6a66;
+  font-size: 0.75rem;
+}
+
+/* -------------------------------------------------------- Small screens --- */
+
+/* Two columns still divides six instruments and four cards evenly. */
+@media (max-width: 900px) {
+  .lab-readout {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .lab-hero__title {
+    font-size: 3rem;
+  }
+
+  .lab-hero {
+    padding: 64px 0 56px;
+  }
+
+  /* The longest reading is "1280 x 713"; at 1.35rem two of those no longer
+     fit side by side on a phone. */
+  .lab-readout__value {
+    font-size: 1.1rem;
+  }
+
+  .lab-systems .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ------------------------------------------------------- Reduced motion --- */
+
+/*
+  The lattice module also stops its loop under this query, so this block only
+  has to settle the transitions that CSS owns.
+*/
+@media (prefers-reduced-motion: reduce) {
+  .lab-card {
+    transform: none;
+    transition: none;
+  }
+}

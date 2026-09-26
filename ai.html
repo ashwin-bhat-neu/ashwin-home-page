@@ -1,0 +1,257 @@
+<!doctype html>
+<!--
+  ===========================================================================
+  Lab — the AI-generated page of this site.
+
+  The two other pages (index.html, work.html) were written by hand. This one
+  was generated, and it is kept in the navigation on purpose: it is an exhibit
+  of what a machine-assembled interface looks like next to a hand-made one.
+
+  It deliberately inherits the site's design language — muted charcoal and
+  sage, trapezoids, hard 1px rules — so the difference a reader notices is
+  density and motion rather than a change of theme.
+  Sections: hero, telemetry, systems, provenance, command palette.
+  ===========================================================================
+-->
+<html lang="en">
+  <head>
+    <!-- Charset first, so the parser never restarts on an encoding change. -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Authorship and discovery metadata, matching the hand-written pages. -->
+    <meta name="author" content="Ashwin Satish Bhat" />
+    <meta
+      name="description"
+      content="Lab: an AI-generated page on Ashwin Satish Bhat's site, running a canvas lattice, live telemetry and a command palette with no frameworks."
+    />
+    <meta name="generator" content="Large language model, reviewed by hand" />
+    <meta name="color-scheme" content="dark" />
+
+    <title>Lab - Ashwin Satish Bhat</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+
+    <!-- Shared stylesheets: the same cascade the hand-written pages load, so
+         header, footer, buttons and cards stay identical across the site. -->
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <!-- Loaded for the shared <kbd> styling the palette and hero reuse. -->
+    <link rel="stylesheet" href="css/shortcuts.css" />
+
+    <!-- Page-specific layer: everything that only the Lab page needs. -->
+    <link rel="stylesheet" href="css/ai.css" />
+
+    <!-- ES module entry point. Module scripts defer by default, so the DOM is
+         already parsed when this runs and no load listener is needed. -->
+    <script type="module" src="./js/ai-main.js"></script>
+  </head>
+
+  <body>
+    <!-- Site header, identical to the other two pages. `aria-current` marks
+         the active tab for assistive technology and for the keyboard
+         navigation module, which reads page order from these links. -->
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="site-brand" href="index.html">ASB</a>
+        <nav class="site-nav" aria-label="Main">
+          <ul class="site-nav__list">
+            <li><a class="site-nav__link" href="index.html">Home</a></li>
+            <li><a class="site-nav__link" href="work.html">Work</a></li>
+            <li>
+              <a class="site-nav__link" href="ai.html" aria-current="page"
+                >Lab</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <!-- 1. Hero. The canvas is decorative, so it is hidden from the
+           accessibility tree: nothing is said there that is not also said in
+           the copy beside it. -->
+      <section class="lab-hero">
+        <canvas class="lab-hero__lattice" aria-hidden="true"></canvas>
+        <div class="lab-hero__content">
+          <p class="lab-hero__eyebrow">Generated surface</p>
+          <h1 class="lab-hero__title">Lab</h1>
+          <p class="lab-hero__lead">
+            A machine wrote this page. It renders
+            <!-- The scrambler cycles these; the first is the no-JS fallback. -->
+            <span
+              class="lab-scramble"
+              data-scramble-phrases="a lattice of trapezoids|sixty frames a second|zero dependencies|about nine kilobytes"
+              >a lattice of trapezoids</span
+            >
+            in the browser, with no build step and no libraries.
+          </p>
+          <div class="lab-hero__actions">
+            <!-- A real <button>, not a styled <div>: it has to be reachable by
+                 keyboard and announced as a button, and it also acts as the
+                 discoverable equivalent of the Ctrl+K shortcut. -->
+            <button class="button lab-hero__command" type="button">
+              Command palette <kbd>Ctrl</kbd> <kbd>K</kbd>
+            </button>
+            <a class="button button--quiet" href="work.html">
+              See the hand-made pages
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Telemetry. Each figure is read from this tab at runtime. Nothing
+           here is a decorative stand-in for data: if a value cannot be
+           measured it stays as the em dash it ships with. -->
+      <section class="section lab-telemetry" id="telemetry">
+        <p class="lab-label">Telemetry</p>
+        <h2 class="section__title">Measured, not decorated</h2>
+        <p class="lab-telemetry__note">
+          Frame timings come from the render loop driving the hero. The rest is
+          read from the window and the pointer as you move it.
+        </p>
+        <dl class="lab-readout">
+          <div class="lab-readout__cell">
+            <dt class="lab-readout__name">Frame rate</dt>
+            <dd class="lab-readout__value" data-readout="frameRate">&mdash;</dd>
+          </div>
+          <div class="lab-readout__cell">
+            <dt class="lab-readout__name">Frame time</dt>
+            <dd class="lab-readout__value" data-readout="frameTime">&mdash;</dd>
+          </div>
+          <div class="lab-readout__cell">
+            <dt class="lab-readout__name">Lattice cells</dt>
+            <dd class="lab-readout__value" data-readout="cellCount">&mdash;</dd>
+          </div>
+          <div class="lab-readout__cell">
+            <dt class="lab-readout__name">Pointer</dt>
+            <dd class="lab-readout__value" data-readout="pointer">&mdash;</dd>
+          </div>
+          <div class="lab-readout__cell">
+            <dt class="lab-readout__name">Viewport</dt>
+            <dd class="lab-readout__value" data-readout="viewport">&mdash;</dd>
+          </div>
+          <div class="lab-readout__cell">
+            <dt class="lab-readout__name">Session</dt>
+            <dd class="lab-readout__value" data-readout="uptime">&mdash;</dd>
+          </div>
+        </dl>
+      </section>
+
+      <!-- 3. Subsystems. Four cards, one per module under js/ai/. The tilt
+           module reads the pointer position and writes rotation onto each
+           card through custom properties. -->
+      <section class="section lab-systems" id="systems">
+        <p class="lab-label">Subsystems</p>
+        <h2 class="section__title">What is running here</h2>
+        <div class="grid">
+          <article class="card lab-card">
+            <p class="card__meta">canvas / 2d</p>
+            <h3 class="card__title">Lattice field</h3>
+            <p class="card__text">
+              A grid of trapezoids whose top edges are driven by a sine wave.
+              Cells near the pointer brighten. The geometry is rebuilt on resize
+              and the loop stops when the tab is hidden.
+            </p>
+            <ul class="tag-list">
+              <li class="tag">requestAnimationFrame</li>
+              <li class="tag">seeded jitter</li>
+            </ul>
+          </article>
+          <article class="card lab-card">
+            <p class="card__meta">text</p>
+            <h3 class="card__title">Scrambler</h3>
+            <p class="card__text">
+              The phrase in the heading resolves one character at a time out of
+              a stream of noise, then holds before the next phrase. The final
+              text is in the markup, so it reads correctly without scripting.
+            </p>
+            <ul class="tag-list">
+              <li class="tag">deterministic</li>
+              <li class="tag">no layout shift</li>
+            </ul>
+          </article>
+          <article class="card lab-card">
+            <p class="card__meta">pointer</p>
+            <h3 class="card__title">Parallax tilt</h3>
+            <p class="card__text">
+              These cards rotate toward the cursor. The angle is written to CSS
+              custom properties and the transform itself lives in the
+              stylesheet, so motion can be disabled without touching the code.
+            </p>
+            <ul class="tag-list">
+              <li class="tag">custom properties</li>
+              <li class="tag">fine pointers only</li>
+            </ul>
+          </article>
+          <article class="card lab-card">
+            <p class="card__meta">input</p>
+            <h3 class="card__title">Command palette</h3>
+            <p class="card__text">
+              <kbd>Ctrl</kbd> <kbd>K</kbd> opens a filterable command list built
+              on the native dialog element, so focus trapping, the backdrop and
+              dismissal come from the platform rather than from script.
+            </p>
+            <ul class="tag-list">
+              <li class="tag">&lt;dialog&gt;</li>
+              <li class="tag">arrow keys</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- 4. Provenance. The point of the page is the comparison, so it says
+           plainly what was generated and what was not. -->
+      <section class="section lab-provenance" id="provenance">
+        <p class="lab-label">Provenance</p>
+        <h2 class="section__title">Where this page came from</h2>
+        <p class="lab-provenance__text">
+          Home and Work were written by hand, in plain CSS, with the layout
+          worked out in the browser. This page was generated by a language
+          model, given the same palette and the same trapezoid geometry to work
+          from, and then read through and corrected by hand before it shipped.
+        </p>
+        <p class="lab-provenance__text">
+          It is kept here as a comparison. The machine reaches for density,
+          motion and instrumentation; the hand-made pages reach for white space
+          and short sentences. Both are the same six colours.
+        </p>
+      </section>
+    </main>
+
+    <!-- 5. Command palette. Empty on purpose: the list is rendered from the
+         command registry in js/ai-main.js, and the dialog is unreachable
+         without scripting anyway. -->
+    <dialog class="palette" aria-label="Command palette">
+      <div class="palette__search">
+        <span class="palette__prompt" aria-hidden="true">&gt;</span>
+        <input
+          class="palette__input"
+          type="text"
+          placeholder="Filter commands"
+          aria-label="Filter commands"
+          autocomplete="off"
+        />
+      </div>
+      <ul class="palette__list"></ul>
+      <p class="palette__empty" hidden>No command matches that.</p>
+      <div class="palette__footer">
+        <p class="palette__hint">
+          <kbd>&uarr;</kbd> <kbd>&darr;</kbd> to move, <kbd>Enter</kbd> to run,
+          <kbd>Esc</kbd> to close
+        </p>
+        <form method="dialog">
+          <button class="button button--quiet" type="submit">Close</button>
+        </form>
+      </div>
+    </dialog>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <p>&copy; 2026 Ashwin Satish Bhat</p>
+        <p>Made with HTML, CSS and JavaScript.</p>
+      </div>
+    </footer>
+  </body>
+</html>
