@@ -1,0 +1,72 @@
+kbd {
+  padding: 1px 7px;
+  border: 1px solid #4a4c50;
+  border-bottom-width: 3px;
+  background-color: #25272a;
+  color: var(--color-ink);
+  font-family: monospace;
+  font-size: 0.85rem;
+}
+
+.shortcut-button {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  padding: 8px 26px;
+  border: none;
+  background-color: var(--color-surface);
+  clip-path: polygon(14% 0, 86% 0, 100% 100%, 0 100%);
+  color: var(--color-ink-soft);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.85rem;
+}
+
+.shortcut-button:hover {
+  color: var(--color-ink);
+}
+
+.site-footer {
+  padding-bottom: 60px;
+}
+
+.shortcut-dialog {
+  width: 380px;
+  max-width: 90%;
+  padding: 28px;
+  border: none;
+  border-top: 4px solid var(--color-sage);
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+}
+
+.shortcut-dialog::backdrop {
+  background-color: rgb(0 0 0 / 60%);
+}
+
+.shortcut-dialog__title {
+  font-size: 1.3rem;
+}
+
+.shortcut-list {
+  margin: 0 0 24px;
+}
+
+.shortcut-list__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.shortcut-list__row dd {
+  margin: 0;
+  color: var(--color-ink-soft);
+}
+
+@media (hover: none) {
+  .shortcut-button {
+    display: none;
+  }
+}
