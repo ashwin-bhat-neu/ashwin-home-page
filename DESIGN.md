@@ -101,6 +101,24 @@ Title and one line of introduction. Projects as rows: name and type on the
 left, description and repo link on the right. Below that, the art gallery,
 with one wide piece across the top and the rest in a grid.
 
+### Lab
+
+A simple wireframe for the Lab page:
+
+```text
+[ Header / Navigation ]
+
+[ Lab introduction ]
+
+[ Main generated content ]
+
+[ Interactive controls ]
+
+[ Footer ]
+```
+
+This keeps the third page represented in the design mockups alongside Home and Work.
+
 ### Shortcut dialog
 
 ![Wireframe of the keyboard shortcut dialog](images/wireframes/shortcuts.jpeg)
